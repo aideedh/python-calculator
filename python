@@ -1,0 +1,142 @@
+"""
+This program helps calculate and sales tax on an item and define how much change is required
+"""
+
+
+def main():
+#the main function executes all other functions step by step
+    Intro()
+    Select()
+
+def Intro():
+    print("_____________________________________________________")
+    print("This application is used to solve various caculations")
+    print("_____________________________________________________")
+    print("------------------------")
+    print("Please Make A Selection:")
+    print("------------------------")
+    print("1. Calculator")
+    print("2. Sales Tax")
+    print("_____________________________________________________")
+
+def Select():
+    choice  = input("-> Enter choice(1/2): ")
+    if choice in ("1", "2"):
+        
+        
+        if choice == '1':
+            print("_____________________________________________________")
+            Calculator()
+        elif choice == '2':
+            Sales_Tax()
+    
+    else:
+        print("Please Choose: 1 or 2")
+
+
+
+#---------------------------------------#
+#             Calculator                #
+#---------------------------------------#
+
+def Calculator():
+    
+    print("-----------------")
+    print("Select operation")
+    print("-----------------")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+
+   # Takes a user input
+    print("_____________________________________________________")
+    choice  = input("-> Enter choice(1/2/3/4): ")
+    print("_____________________________________________________")
+    
+    # Check if user input is 1 of the 4 operations
+    while True:
+        if choice in ("1", "2", "3", "4"):
+            print(" -----------------------")
+            Input1 = float(input(" Enter first number: "))
+            Input2 = float(input("Enter second number: "))
+    
+        #Addition
+        if choice == '1':
+            Total = Input1 + Input2
+            print("-----------------------")
+            print("         Addition")
+            print(" -----------------------")
+            print(" -> " + str(Input1) + " added to " + str(Input2) + " = " + str(Total))
+        
+        #Subtraction
+        elif choice == '2':
+            Total = Input1 - Input2
+            print("-----------------------")
+            print("         Subtraction")
+            print(" -----------------------")
+            print(" -> " + str(Input1) + " subtracted from " + str(Input2) + " = " + str(Total))
+        
+        #Division  
+        elif choice == '3':
+            Total = Input1 * Input2
+            print("-----------------------")
+            print("         Division")
+            print(" -----------------------")
+            print(" -> " + str(Input1) + " multiplied by " + str(Input2) + " = " + str(Total))
+        
+        #Multiplication
+        elif choice == '4':
+            Total = Input1 / Input2
+            print("-----------------------")
+            print("         Multiplication")
+            print("-----------------")
+            print(" -> " + str(Input1) + " divided by " + str(Input2) + " = " + str(Total))
+        break
+    else:
+        print("Please Select: 1/2/3/4")
+        
+#---------------------------------------#
+#              Sales Tax                #
+#---------------------------------------#
+
+RATE = 13
+PROVINCE_TAX_RATE = 1.13 #Ontario sales tax in 2021 is 1.13%
+PROVINCE = "Ontario" #Change as needed
+
+
+def Sales_Tax():
+
+    print_intro()
+
+    price = get_price() #user gives a product price, program checks if the entry is valid.
+    tax = calculate_tax(price) #this function calculates the tax based on the price provided by the user.
+    total_price = money_owed(tax,price) #this function calculates the total price including the tax.
+
+    print_calculation(tax,price,total_price)
+
+def print_intro():
+    print("This application is used to calculate sales tax on an item")
+
+def get_price():
+    price = float(input("Enter the price before tax: $"))
+    price = round(price,2)
+    return price
+    
+def calculate_tax(price): #this function calculates the tax based on the price provided by the user.
+    tax = price * PROVINCE_TAX_RATE
+    tax = round(tax,2)
+    return tax
+
+def money_owed(tax,price): #this function calculates the total price including the tax.
+    total_price = tax + price
+    return total_price
+
+def print_calculation(tax,price,total_price): #prints information about the tax rate in the city and calculated tax and total price
+    print("The sales tax in " + PROVINCE + " is " + str(RATE) + "%.")
+    print("Based on the price you provided, the calculated sales tax is $" + str(tax))
+    print("The total price is $" + str(total_price) + ".")
+
+
+
+main()
